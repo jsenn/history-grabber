@@ -79,10 +79,6 @@ setThreshold = (unvisited_time) ->
   THRESHOLD = 1.75 * unvisited_time
   console.log "Threshold: #{THRESHOLD}"
 
-counter = ->
-  x = 0
-  -> ++x
-
 find_visited = (urls) ->
   t = timer()
 
@@ -91,11 +87,8 @@ find_visited = (urls) ->
     (stop_timer_and_clear setThreshold, url, t)
   ]
 
-  c = counter()
-
   testStopFn = (time, url) ->
     result_container = document.getElementById 'resultContainer'
-    console.log c()
     if time > THRESHOLD
       a = document.createElement 'a'
       a.href = "http://www.#{url}"
@@ -114,9 +107,9 @@ find_visited = (urls) ->
   go = quantize_to_frames tasks
   go()
 
-# Get the (local) url data and send it to `find_visited`.
+# Get the local url data and send it to `find_visited`.
 getData = ->
-  if not windows.chrome?
+  if not window.chrome?
     document.write 'Sorry, the script only works in Google Chrome for the moment.'
     return
   request = new XMLHttpRequest()

@@ -1,0 +1,3 @@
+all:
+	coffee -c *.coffee
+
